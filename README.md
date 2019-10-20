@@ -10,7 +10,7 @@ This package automates the version control of data files by automatically adding
 - Run `create_data_vc()` on project initializaiton, this will create a text file in the root directory to track file versions. 
 - Save files with `saveRDS_vc()`. Supply arguments *exactly* as you would to `saveRDS`. A stamp will be automatically added with daily granularity by default. 
   - Commit the changes to `DATA_VC` to git. 
-- Read files with `readRDS_vc()`. Supply arguments *exactly* as you would to `readRDS`. **Do not include the stamp in the `file` parameter **
+- Read files with `readRDS_vc()`. Supply arguments *exactly* as you would to `readRDS`. **Do not include the stamp in the `file` parameter**
 - If you need to return to a prior point in your git history, `DATA_VC` will revert and `readRDS_vc` will pull the correct data file for that point in time. 
 
 # Details
