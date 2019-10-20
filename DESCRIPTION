@@ -1,0 +1,26 @@
+Package: DataVersionControl
+Type: Package
+Title: Automates version control tracking for data files
+Version: 0.1.0
+Author: person("Lief", "Esbenshade", email = "williamlief@gmail.com", role = c("aut", "cre"))
+Maintainer: Lief Esbenshade <williamlief@gmail.com>
+Description: This package address the challenge of tracking data files within 
+    git. It works by creating multiple versions of datafiles, and updating a text
+    file that records the current version. It is disk space intensive and likely 
+    not an appropriate solution for files that are very large and change 
+    frequently. The user should first run `make_data_vc()` which will create the
+    tracking file ("data_vc" by default) in the root directory. All subsequent 
+    data files should be saved and read using saveRDS_vc and readRDS_vc, these 
+    functions behave exactly the same as their base versions, except that they access 
+    the "data_vc" file to track the `stamp` prefix and write/read the appropriate 
+    file. The default stamp is Sys.Date() and will not track changes within a day, 
+    use Sys.time() for more granular tracking. Git commits of changes to "data_vc"
+    will allow the user toreturn to any previous commit of the project and 
+    automatically access the data in the state that it existed at that point in 
+    the git history. 
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Imports: 
+    readr
