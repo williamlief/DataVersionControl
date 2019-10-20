@@ -7,6 +7,7 @@ updating them in all relevent scripts whenever a data set was edited.
 This package automates the version control of data files by automatically adding prefixes to file names, and using git to save the current version at each point in time. 
 
 # Use
+- install using `devtools::install_github("williamlief/DataVersionControl")`
 - Run `create_data_vc()` on project initializaiton, this will create a text file in the root directory to track file versions. 
 - Save files with `saveRDS_vc()`. Supply arguments *exactly* as you would to `saveRDS`. A stamp will be automatically added with daily granularity by default. 
   - Commit the changes to `DATA_VC` to git. 
