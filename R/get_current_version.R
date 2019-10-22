@@ -9,6 +9,9 @@
 #' @keywords internal
 get_current_version <- function(file, version_control, verbose = FALSE){
 
+  if(!file.exists(version_control)) {
+    stop(paste("version control file:", file, "does not exist. Have you run make_data_vc?"))
+  }
 
   current <- readr::read_csv(version_control, col_types = "cc")
   record <- current[current$file == file,]
