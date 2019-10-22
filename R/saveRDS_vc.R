@@ -29,16 +29,13 @@ saveRDS_vc <- function(object,
                        verbose = FALSE
                        ) {
 
-  if(!file.exists(version_control)) {
-    stop(paste("version control file:", file, "does not exist. Have you run make_data_vc?"))
-  }
   stamp <- paste(stamp)
+  update_version_control(file, stamp, version_control, verbose)
 
   # file_stamped <-  gsub(".rds", paste0("_", Sys.time(), ".rds"), file, ignore.case = TRUE)
   file_stamped <- paste(stamp, file, sep ="_")
 
   saveRDS(object, file_stamped, ...)
 
-  update_version_control(file, stamp, version_control, verbose)
 
 }

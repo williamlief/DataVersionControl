@@ -18,6 +18,10 @@ update_version_control <- function(file,
                                    version_control,
                                    verbose = FALSE) {
 
+  if(!file.exists(version_control)) {
+    stop(paste("version control file:", file, "does not exist. Have you run make_data_vc?"))
+  }
+
   update <- data.frame(file = file,
                        stamp = stamp,
                        stringsAsFactors = FALSE)
