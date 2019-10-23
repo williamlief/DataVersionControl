@@ -31,5 +31,5 @@ get_current_version <- function(file, version_control, verbose = FALSE){
     print(paste("Returned version for file:", file, "is:", record$stamp))
   }
 
-  return(paste(record$stamp, record$file, sep = "_"))
+  return(stamp_file(record$file, record$stamp))
 }
