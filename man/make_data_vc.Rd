@@ -19,5 +19,5 @@ Function should be run on project startup to initialize the
 data version control file. For optimal use, do not change file name.
 }
 \examples{
-make_data_vc()
+\donttest{make_data_vc()}
 }

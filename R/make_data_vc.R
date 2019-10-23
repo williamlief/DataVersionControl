@@ -9,7 +9,8 @@
 #' @return null invisibly
 #' @export
 #'
-#' @examples make_data_vc()
+#' @examples
+#' \donttest{make_data_vc()}
 make_data_vc <- function(file = "DATA_VC", replace = FALSE) {
 
   if(file.exists(file) & !replace) {
