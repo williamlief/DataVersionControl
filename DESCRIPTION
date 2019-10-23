@@ -25,3 +25,5 @@ RoxygenNote: 6.1.1
 Imports: 
     readr,
     clipr
+Suggests: 
+    testthat
