@@ -19,7 +19,7 @@ update_version_control <- function(file,
                                    verbose = FALSE) {
 
   if(!file.exists(version_control)) {
-    stop(paste("version control file:", file, "does not exist. Have you run make_data_vc?"))
+    stop(paste("version control file:", version_control, "does not exist. Have you run make_data_vc?"))
   }
 
   update <- data.frame(file = file,
