@@ -1,8 +1,8 @@
 context("test get_vc_name")
 
-test_that("runs silently", {
-  expect_silent(get_vc_name("testdata/mycars.rds"))
-})
+# test_that("runs silently", {
+#   expect_silent(get_vc_name("testdata/mycars.rds"))
+# })
 
 test_that("error if file not found", {
   expect_error(get_vc_name("testmycars.rds"))
