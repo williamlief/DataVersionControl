@@ -2,5 +2,7 @@
 
 export(get_vc_name)
 export(make_data_vc)
+export(read.dta_vc)
 export(readRDS_vc)
+export(save.dta_vc)
 export(saveRDS_vc)
