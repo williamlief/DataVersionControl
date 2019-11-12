@@ -5,13 +5,17 @@
 #'
 #' @param file default is "DATA_VC, for optimal use do not change.
 #' @param replace Allows overwriting of data_vc file.
+#' @param default_stamp, what stamp should be appended to files? Default is `Sys.Date()`,
+#' Also recommended is `Sys.time()` for more granular version tracking.
 #'
 #' @return null invisibly
 #' @export
 #'
 #' @examples
 #' \donttest{make_data_vc()}
-make_data_vc <- function(file = "DATA_VC", replace = FALSE) {
+make_data_vc <- function(file = "DATA_VC", replace = FALSE,
+                         default_stamp = Sys.Date()
+                         ) {
 
   if(file.exists(file) & !replace) {
     stop(paste("version control file:", file, "already exists. Set replace = TRUE to overwrite"))
@@ -23,5 +27,14 @@ make_data_vc <- function(file = "DATA_VC", replace = FALSE) {
     stringsAsFactors = FALSE
   )
 
-  readr::write_csv(x = data_vc, path = file)
+  datafile <- file(file, open = "wt")
+  on.exit(close(datafile))
+
+  writeLines(c(paste("default_stamp =", default_stamp)), con = datafile)
+  writeLines("", con = datafile) # placeholders if we need more config options
+  writeLines("", con = datafile)
+  writeLines("", con = datafile)
+  writeLines("", con = datafile)
+
+  readr::write_csv(x = data_vc, path = datafile)
 }

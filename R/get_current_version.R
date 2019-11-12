@@ -13,7 +13,7 @@ get_current_version <- function(file, version_control, verbose = FALSE){
     stop(paste("version control file:", version_control, "does not exist. Have you run make_data_vc?"))
   }
 
-  current <- readr::read_csv(version_control, col_types = "cc")
+  current <- readr::read_csv(version_control, col_types = "cc", skip = 5)
   record <- current[current$file == file,]
 
   if(nrow(record) == 0) {
