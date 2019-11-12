@@ -26,7 +26,7 @@ update_version_control <- function(file,
                        stamp = stamp,
                        stringsAsFactors = FALSE)
 
-  current <- readr::read_csv(version_control, col_types = "cc")
+  current <- readr::read_csv(version_control, col_types = "cc", skip = 5)
   current <- current[current$file != file,]
 
   data_vc <- rbind(current, update)
