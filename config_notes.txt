@@ -1,0 +1,6 @@
+Problem - when updating file in `update_version_control` the config lines are erased.
+Beacuse skipping config lines, they aren't read-in to be resaved. So, need to read in
+config params, write them, then write updates.
+
+Also need to modify dta and rds write functions so default for version_control param is
+read off of the config data. 
