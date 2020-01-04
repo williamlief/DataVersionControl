@@ -14,7 +14,7 @@ saveRDS_vc(object, file, ..., stamp = Sys.Date(),
 
 \item{...}{other params for saveRDS see \code{\link[base]{saveRDS}}}
 
-\item{stamp}{file suffix to disambiguate, default is Sys.time()}
+\item{stamp}{file suffix to disambiguate, default is Sys.Date()}
 
 \item{version_control}{name of data version control file. Default is `data_vc`. Should match name used in `make_data_vc`.}
 

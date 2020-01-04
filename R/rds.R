@@ -7,7 +7,7 @@
 #' @param object `R` object to serialize.
 #' @param file a connection or the name of the file where the `R` object is saved to or read from
 #' @param ... other params for saveRDS see \code{\link[base]{saveRDS}}
-#' @param stamp file suffix to disambiguate, default is Sys.time()
+#' @param stamp file suffix to disambiguate, default is Sys.Date()
 #' @param version_control name of data version control file. Default is `data_vc`. Should match name used in `make_data_vc`.
 #' @param verbose logical, report update to version control file? Default is FALSE
 #'
