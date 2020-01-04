@@ -61,7 +61,7 @@ read.dta_vc <- function(file,
 #' make_data_vc()
 #' foreign::write.dta_vc(cars, "my_cars.dta", verbose = TRUE)
 #' }
-save.dta_vc  <- function(object,
+write.dta_vc  <- function(dataframe,
                        file,
                        ...,
                        stamp = Sys.Date(),
@@ -78,5 +78,5 @@ save.dta_vc  <- function(object,
   update_version_control(file, stamp, version_control, verbose)
   file_stamped <- stamp_file(file, stamp)
 
-  foreign::write.dta(object, file_stamped, ...)
+  foreign::write.dta(dataframe, file_stamped, ...)
 }

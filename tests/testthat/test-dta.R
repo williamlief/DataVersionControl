@@ -1,7 +1,7 @@
 context("test foreign dta wrappers")
 
-save.dta_vc(cars[1:10,], "testdata/mycars.dta", stamp = "test2")
-save.dta_vc(cars[1:5,], "testdata/mycars.dta", stamp = "test3")
+write.dta_vc(cars[1:10,], "testdata/mycars.dta", stamp = "test2")
+write.dta_vc(cars[1:5,], "testdata/mycars.dta", stamp = "test3")
 
 # note teardown deletes everything in testdata directory
 

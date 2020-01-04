@@ -9,7 +9,7 @@ read.csv_vc(file, ..., version_control = "DATA_VC", verbose = FALSE)
 \arguments{
 \item{file}{the name of the file which the data are to be read from.}
 
-\item{...}{other params for read.csv see \code{\link[base]{read.csv}}}
+\item{...}{other params for read.csv see \code{\link[utils]{read.csv}}}
 
 \item{version_control}{name of data version control file. Default is `data_vc`. Should match name used in `make_data_vc`.}
 

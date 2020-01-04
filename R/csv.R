@@ -6,12 +6,12 @@
 #'
 #' @param x the object to be written, preferably a matrix or data frame. If not, it is attempted to coerce x to a data frame.
 #' @param file 	either a character string naming a file or a connection open for writing. "" indicates output to the console.
-#' @param ... other params for write.csv see \code{\link[base]{write.csv}}
+#' @param ... other params for write.csv see \code{\link[utils]{write.csv}}
 #' @param stamp file suffix to disambiguate, default is Sys.Date()
 #' @param version_control name of data version control file. Default is `data_vc`. Should match name used in `make_data_vc`.
 #' @param verbose logical, report update to version control file? Default is FALSE
 #'
-#' @seealso \code{\link[base]{write.csv}}
+#' @seealso \code{\link[utils]{write.csv}}
 #'
 #' @return NULL invisibly
 #' @export
@@ -33,7 +33,7 @@ write.csv_vc <- function(x,
   update_version_control(file, stamp, version_control, verbose)
 
   file_stamped <- stamp_file(file, stamp)
-  write.csv(x, file_stamped, ...)
+  utils::write.csv(x, file_stamped, ...)
 }
 
 
@@ -44,7 +44,7 @@ write.csv_vc <- function(x,
 #' with the current version of the desired `file`.
 #'
 #' @param file the name of the file which the data are to be read from.
-#' @param ... other params for read.csv see \code{\link[base]{read.csv}}
+#' @param ... other params for read.csv see \code{\link[utils]{read.csv}}
 #' @param version_control name of data version control file. Default is `data_vc`. Should match name used in `make_data_vc`.
 #' @param verbose logical, report returned current file version? Default is FALSE
 #'
@@ -63,7 +63,7 @@ read.csv_vc <- function(file,
                        verbose = FALSE) {
 
   file <- get_current_version(file, version_control, verbose)
-  read.csv(file, ...)
+  utils::read.csv(file, ...)
 
 }
 

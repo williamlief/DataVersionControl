@@ -12,7 +12,7 @@ write.csv_vc(x, file, ..., stamp = Sys.Date(),
 
 \item{file}{either a character string naming a file or a connection open for writing. "" indicates output to the console.}
 
-\item{...}{other params for write.csv see \code{\link[base]{write.csv}}}
+\item{...}{other params for write.csv see \code{\link[utils]{write.csv}}}
 
 \item{stamp}{file suffix to disambiguate, default is Sys.Date()}
 
@@ -35,5 +35,5 @@ write.csv_vc(cars, "my_cars.csv", verbose = TRUE)
 }
 }
 \seealso{
-\code{\link[base]{write.csv}}
+\code{\link[utils]{write.csv}}
 }
