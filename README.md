@@ -1,24 +1,111 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 # DataVersionControl
-Package for Automating Version Control of Data Files. 
 
-This package came about from my frustration with trying to recreate old charts and tables while working on long term research projects. 
-Because data files are not tracked in git, tracking my code meant either laboriously re-running old data cleaning scripts to restore data to its prior state or manually adding version stamps to data files and 
-updating them in all relevent scripts whenever a data set was edited. 
-This package automates the version control of data files by automatically adding prefixes to file names, and using git to save the current version at each point in time. 
+<!-- badges: start -->
 
-# Use
-- install using `devtools::install_github("williamlief/DataVersionControl")`
-- Run `create_data_vc()` on project initializaiton, this will create a text file in the root directory to track file versions. 
-- Save files with `saveRDS_vc()`. Supply arguments *exactly* as you would to `saveRDS`. A stamp will be automatically added with daily granularity by default. 
-  - Commit the changes to `DATA_VC` to git. 
-- Read files with `readRDS_vc()`. Supply arguments *exactly* as you would to `readRDS`. **Do not include the stamp in the `file` parameter**
-- If you need to return to a prior point in your git history, `DATA_VC` will revert and `readRDS_vc` will pull the correct data file for that point in time. 
+<!-- badges: end -->
 
-# Details
-This package address the challenge of tracking data files within git. 
-It works by creating multiple versions of datafiles, and updating a textfile that records the current version. 
-It is disk space intensive and likely not an appropriate solution for files that are very large and change frequently. 
-The user should first run `make_data_vc()` which will create the tracking file ("data_vc" by default) in the root directory. 
-All subsequent data files should be saved and read using saveRDS_vc and readRDS_vc, these functions behave exactly the same as their base versions, except that they access the "data_vc" file to track the `stamp` prefix and write/read the appropriate file. 
-The default stamp is `Sys.Date()` and will not track changes within a day, use `Sys.time()` for more granular tracking. 
-Git commits of changes to "data_vc" will allow the user toreturn to any previous commit of the project and automatically access the data in the state that it existed at that point in the git history. 
+The goal of DataVersionControl is to make it easy to keep track of
+changes to clean data over the course of a project, and easily compare
+results before and after data cleaning scripts are changed. Because data
+files are not well tracked in git, this package automates the version
+control of data files by saving multiple versions of data files with
+automatic Sys.time suffixes, and a text file to track the current file
+to use.
+
+## Installation
+
+<!-- You can install the released version of DataVersionControl from [CRAN](https://CRAN.R-project.org) with: -->
+
+<!-- ``` r -->
+
+<!-- install.packages("DataVersionControl") -->
+
+<!-- ``` -->
+
+You can install the development version of DataVersionControl from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("williamlief/DataVersionControl")
+```
+
+## Example
+
+This walkthrough shows you how to get up and running with
+DataVersionControl.  
+First, in a new r project, initialize the tracking file with
+`make_data_vc()` and save a test file.
+
+``` r
+devtools::install_github("williamlief/DataVersionControl")
+library(DataVersionControl)
+# this creates the `DATA_VC` file in your current working directory
+make_data_vc()
+
+# Here we save a file, if you look in your working directory you will see that
+# it is saved with an appended stamp that shows the current system time.
+saveRDS_vc(cars, "my_cars.RDS")
+```
+
+![the created files](man/figures/README-Static/directory1.png)
+
+Now commit the DATA\_VC file to git. If you haven’t already, add \*.RDS
+to your .gitignore file (this will cause git to ignore RDS files, and
+help you maintain a clean git status)
+
+![the created files](man/figures/README-Static/git1.png)
+
+You can read the saved data back into R.
+
+``` r
+# Read the file back into R without referencing the stamp
+# The function checks DATA_VC to pull the current version of the file. 
+read_cars <- readRDS_vc("my_cars.RDS")
+```
+
+Finally, when you have updates to your data cleaning script, you can do
+so without worrying about updating file references or losing the ability
+to reproduce old results.
+
+``` r
+# update the data set and resave it
+cars_new <- cars[1:10,]
+
+# Use the same filename to save the updated data set
+saveRDS_vc(cars_new, "my_cars.RDS")
+```
+
+Note that you will now have two copies of my\_cars.RDS saved, with two
+different time stamps. DATA\_VC is updated to show the latest version of
+my\_cars, and should now be committed to git.
+
+![the created files](man/figures/README-Static/directory2.png) ![the
+created files](man/figures/README-Static/git2.png)
+
+You can read in the file exactly as before, and will see now that it has
+pulled the updated file with only ten rows.
+
+``` r
+read_cars <- readRDS_vc("my_cars.RDS")
+nrow(read_cars)
+```
+
+By using saveRDS\_vc and readRDS\_vc throughout your project, you can
+ensure that you are always pulling the current version of a data file,
+and that you have a complete history of data files to revert to as more
+data cleaning fixes are implemented.
+
+My preferred workflow is to have a raw-data folder that is
+write-once/read-only and contains original source data for the project,
+I then have a data folder that contains the output from cleaning scripts
+that process the raw-data files into tidy datasets that will be used by
+my analysis scripts. Often, during the course of analysis I find issues
+in the data that I missed in initial cleaning and this package automates
+the tracking of the different clean versions of the data files.
+
+This package also works well with git branches to explore quickly how
+different cleaning choices impact the results.
